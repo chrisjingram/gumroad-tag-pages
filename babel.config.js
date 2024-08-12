@@ -22,7 +22,14 @@ module.exports = function (api) {
         {
           removeImport: true
         }
-      ]
+      ],
+      ["inline-react-svg", { svgo: false }],
+      ["module-resolver", {
+        alias: {
+          "~": "./app/javascript",
+          "@svg": "./app/assets/svg"
+        }
+      }]
     ].filter(Boolean),
   }
 

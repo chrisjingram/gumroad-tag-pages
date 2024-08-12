@@ -1,0 +1,5 @@
+<% if params[:top_level_category] == "3d" %>
+  <%= render body: Products.three_d.to_json %>
+<% else %>
+  <%= render body: Products.send(params[:top_level_category].underscore).as_json %>
+<% end %>
