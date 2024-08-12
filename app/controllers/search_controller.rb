@@ -1,15 +1,19 @@
 class SearchController < ApplicationController
   def index
     # request.format = :json
+    if params[:top_level_category] == "3d"
+      @product_data = ProductData.three_d
+    else
+      @product_data = ProductData.send(params[:top_level_category].underscore)
+    end
     respond_to do |format|
       format.html
       format.json {
         if params[:top_level_category] == "3d"
-          render json: ProductData.three_d
+          render json: @product_data
         else
-          render json: ProductData.send(params[:top_level_category].underscore)
+          render json: @product_data
         end
-
       }
     end
   end

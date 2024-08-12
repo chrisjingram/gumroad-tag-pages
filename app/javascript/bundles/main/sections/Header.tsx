@@ -4,7 +4,7 @@ import FilterIcon from "@svg/filter.svg";
 
 const Header = () => {
   return (
-    <header className="bg-gumroad-green p-4">
+    <header className="bg-gumroad-green px-4 py-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-black"><GumroadLogo /></h1>
       </div>

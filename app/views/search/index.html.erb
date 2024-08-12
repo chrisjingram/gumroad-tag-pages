@@ -1,1 +1,1 @@
-<%= react_component "Search" %>
+<%= react_component "Search", props: { products: @product_data.dig(:products), tags: @product_data.dig(:tags) } %>
