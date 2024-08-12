@@ -4,7 +4,7 @@ import { FiltersProvider } from "./contexts/filtersContext";
 
 const App: React.FC<SearchProps> = (props) => {
   return (
-    <FiltersProvider initialSelectedTags={props.initial_selected_tags}>
+    <FiltersProvider initialSelectedTagKeys={props.initial_selected_tag_keys} tags={props.tags}>
       <Search {...props} />
     </FiltersProvider>
   );

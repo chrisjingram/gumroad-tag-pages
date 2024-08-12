@@ -6,7 +6,7 @@ class SearchController < ApplicationController
     else
       @product_data = ProductData.send(params[:top_level_category].underscore)
     end
-    @initial_selected_tags = params[:tags]&.split(",")
+    @initial_selected_tag_keys = params[:tags]&.split(",")
     respond_to do |format|
       format.html
       format.json {

@@ -7,14 +7,14 @@ import Filters from "./sections/Filters";
 export interface SearchProps {
   products: Product[];
   tags: Tag[];
-  initial_selected_tags: Tag[];
+  initial_selected_tag_keys: string[];
 }
 
 const Search: React.FC<SearchProps> = ({ products, tags }) => {
   return (
-    <div>
+    <div className="bg-gumroad-cream">
       <Header />
-      <Filters />
+      <Filters tags={tags} />
       <Products products={products} />
     </div>
   )

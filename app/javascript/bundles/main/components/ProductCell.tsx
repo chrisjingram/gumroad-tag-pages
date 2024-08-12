@@ -7,7 +7,7 @@ interface Props {
 
 const ProductCell: React.FC<Props> = ({ product }) => {
   return (
-    <div className="rounded-[4px] border border-gumroad-black overflow-hidden">
+    <div className="rounded-[4px] border border-gumroad-black overflow-hidden bg-white">
       <div className="relative">
         <img src={product.thumbnail_url} alt={product.name} className="w-full aspect-square object-cover" />
       </div>

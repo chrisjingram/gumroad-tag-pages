@@ -17,7 +17,8 @@ module.exports = {
         "gumroad-blue": "#91a8ed",
         "gumroad-red": "#98282a",
         "gumroad-orange": "#ff7051",
-        "gumroad-black": "#0d0d0d"
+        "gumroad-black": "#0d0d0d",
+        "gumroad-cream": "#F4F4F1"
       },
       fontFamily: {
         sans: [systemFontStack]

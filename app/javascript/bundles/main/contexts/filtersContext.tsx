@@ -2,27 +2,34 @@ import React, { ReactNode, SetStateAction, useContext, useState } from "react";
 import { Tag } from "../Types.interface";
 
 interface Props {
-  initialSelectedTags: Tag[];
+  initialSelectedTagKeys: string[];
+  tags: Tag[];
   children: ReactNode;
 }
 
 interface FiltersContextValue {
+  selectedTagKeys: string[];
+  setSelectedTagKeys?: React.Dispatch<SetStateAction<string[]>>;
   selectedTags: Tag[];
-  setSelectedTags?: React.Dispatch<SetStateAction<Tag[]>>;
 }
 
 export const FiltersContext = React.createContext<FiltersContextValue>({
-  selectedTags: [],
-  setSelectedTags: null
+  selectedTagKeys: [],
+  setSelectedTagKeys: null,
+  selectedTags: []
 });
 
 
-export const FiltersProvider: React.FC<Props> = ({ initialSelectedTags, children }) => {
-  const [selectedTags, setSelectedTags] = useState(initialSelectedTags)
+export const FiltersProvider: React.FC<Props> = ({ initialSelectedTagKeys, tags, children }) => {
+  const [selectedTagKeys, setSelectedTagKeys] = useState(initialSelectedTagKeys || []);
+
+  const selectedTags = selectedTagKeys.map(key => tags.find(tag => tag.key === key))
+
   return (
     <FiltersContext.Provider value={{
-      selectedTags,
-      setSelectedTags
+      selectedTagKeys,
+      setSelectedTagKeys,
+      selectedTags
     }}>
       {children}
     </FiltersContext.Provider>
