@@ -1,5 +1,6 @@
-import React, { ReactNode, SetStateAction, useContext, useState } from "react";
+import React, { ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 import { Tag } from "../Types.interface";
+import qs from "qs"
 
 interface Props {
   initialSelectedTagKeys: string[];
@@ -24,6 +25,17 @@ export const FiltersProvider: React.FC<Props> = ({ initialSelectedTagKeys, tags,
   const [selectedTagKeys, setSelectedTagKeys] = useState(initialSelectedTagKeys || []);
 
   const selectedTags = selectedTagKeys.map(key => tags.find(tag => tag.key === key))
+
+  useEffect(() => {
+    const existingQS = qs.parse(window.location.search.slice(1));
+    const queryString = qs.stringify({ ...existingQS, tags: selectedTagKeys }, { arrayFormat: "comma", encodeValuesOnly: true });
+    console.log("queryString", queryString);
+    window.history.pushState(
+      {},
+      "",
+      `${window.location.origin}${window.location.pathname}?${queryString}`
+    );
+  }, [selectedTagKeys])
 
   return (
     <FiltersContext.Provider value={{
