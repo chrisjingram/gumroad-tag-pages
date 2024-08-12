@@ -1,1 +1,6 @@
-<%= react_component "Search", props: { products: @product_data.dig(:products), tags: @product_data.dig(:tags) } %>
+<%= react_component "SearchApp", {
+  props: {
+    products: @product_data.dig(:products), tags: @product_data.dig(:tags),
+    initial_selected_tags: @initial_selected_tags
+  }
+} %>
