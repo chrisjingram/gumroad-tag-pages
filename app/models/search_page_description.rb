@@ -22,16 +22,16 @@ class SearchPageDescription < ApplicationRecord
       end
 
       # Generate descriptions for combinations of two tags
-      tags.combination(2).each do |tag_combo|
-        next if find_by(breadcrumbs: category_slug, tags: tag_combo.join(',')).present?
-        description = call_claude_api(category_slug, tag_combo)
-        create!(
-          breadcrumbs: category_slug,
-          tags: tag_combo.join(','),
-          description: description
-        )
-        sleep(1.5) # 50 requests per minute to claude 3.5 sonnet
-      end
+      # tags.combination(2).each do |tag_combo|
+      #   next if find_by(breadcrumbs: category_slug, tags: tag_combo.join(',')).present?
+      #   description = call_claude_api(category_slug, tag_combo)
+      #   create!(
+      #     breadcrumbs: category_slug,
+      #     tags: tag_combo.join(','),
+      #     description: description
+      #   )
+      #   sleep(1.5) # 50 requests per minute to claude 3.5 sonnet
+      # end
     end
   end
 

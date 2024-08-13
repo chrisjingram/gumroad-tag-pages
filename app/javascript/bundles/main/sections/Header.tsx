@@ -23,7 +23,7 @@ const Header: React.FC<Props> = ({ search_page_description }) => {
   };
 
   const breadcrumbs = formatPathname(pathname);
-  const trimmedDescription = trimDescription(search_page_description);
+  const trimmedDescription = search_page_description ? trimDescription(search_page_description) : null;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
   return (
@@ -49,23 +49,25 @@ const Header: React.FC<Props> = ({ search_page_description }) => {
       <div className="mt-4 mb-2">
         <h2 className="text-2xl font-normal text-gumroad-black">{breadcrumbs.join(' / ')}</h2>
       </div>
-      <div>
-        {showFullDescription ? (
-          <p className="text-gumroad-black">
-            {search_page_description}{' '}
-            <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(false); }}>
-              Show less
-            </a>
-          </p>
-        ) : (
-          <p className="text-gumroad-black">
-            {trimmedDescription}{' '}
-            <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(true); }}>
-              Show more
-            </a>
-          </p>
-        )}
-      </div>
+      {search_page_description && (
+        <div>
+          {showFullDescription ? (
+            <p className="text-gumroad-black">
+              {search_page_description}{' '}
+              <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(false); }}>
+                Show less
+              </a>
+            </p>
+          ) : (
+            <p className="text-gumroad-black">
+              {trimmedDescription}{' '}
+              <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(true); }}>
+                Show more
+              </a>
+            </p>
+          )}
+        </div>
+      )}
     </header>
   );
 };
