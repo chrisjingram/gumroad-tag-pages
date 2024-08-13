@@ -33,7 +33,7 @@ export const FiltersProvider: React.FC<Props> = ({ initialSelectedTagKeys, tags,
     window.history.pushState(
       {},
       "",
-      `${window.location.origin}${window.location.pathname}?${queryString}`
+      `${window.location.origin}${window.location.pathname}${queryString && queryString !== "" ? "?" : ""}${queryString}`
     );
   }, [selectedTagKeys])
 

@@ -18,15 +18,15 @@ interface Props {
 
 const Filters: React.FC<Props> = ({ tags }) => {
   const { selectedTags, selectedTagKeys, setSelectedTagKeys } = useFilters();
-  const removeTagKey = useCallback((key) => {
-    setSelectedTagKeys(selectedTagKeys.filter(key => key !== key));
+  const removeTagKey = useCallback((keyToRemove) => {
+    setSelectedTagKeys(selectedTagKeys.filter(key => key !== keyToRemove));
   }, [setSelectedTagKeys, selectedTagKeys]);
   return (
     <div className="px-4 pt-6">
       <ul className="flex gap-2">
         {selectedTags.map(tag => <li><TagCell tag={tag} removeTagKey={removeTagKey} /></li>)}
         <li>
-          <button className="h-[38px] px-1 flex items-center justify-center"><PlusIcon className="w-5 h-5" /></button>
+          <button type="button" className="h-[38px] px-1 flex items-center justify-center"><PlusIcon className="w-5 h-5" /></button>
         </li>
       </ul>
     </div>
