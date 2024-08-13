@@ -3,6 +3,7 @@ import { useFilters } from "../contexts/filtersContext";
 import { Tag } from "../Types.interface";
 import { XMarkIcon, ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/solid"
 import { useProducts } from "../contexts/productsContext";
+import { useTags } from "../contexts/tagsContext";
 
 const TagCell: React.FC<{ tag: Tag, removeTagKey: (key: string) => void }> = ({ tag, removeTagKey }) => {
   return (
@@ -23,7 +24,7 @@ interface Props {}
 
 const Filters: React.FC<Props> = () => {
   const { selectedTagKeys, setSelectedTagKeys } = useFilters();
-  const { isLoading, tags } = useProducts();
+  const { isLoading, tags } = useTags();
   const [shouldShowOtherTags, setShouldShowOtherTags] = useState(false);
   const removeTagKey = useCallback((keyToRemove) => {
     setSelectedTagKeys(selectedTagKeys.filter(key => key !== keyToRemove));
