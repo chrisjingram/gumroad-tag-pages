@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GumroadLogo from "@svg/gumroad.svg";
 import FilterIcon from "@svg/filter.svg";
 
-const Header = () => {
+interface Props {
+  search_page_description: string;
+}
+
+const trimDescription = (description: string): string => {
+  const sentences = description.match(/[^.!?]+[.!?]+/g) || [];
+  return sentences.slice(0, 2).join(' ').trim();
+};
+
+const Header: React.FC<Props> = ({ search_page_description }) => {
   const pathname = window.location.pathname;
   const formatPathname = (path: string): string[] => {
     const segments = path.split('/').filter(segment => segment !== '');
@@ -14,6 +23,9 @@ const Header = () => {
   };
 
   const breadcrumbs = formatPathname(pathname);
+  const trimmedDescription = trimDescription(search_page_description);
+
+  const [showFullDescription, setShowFullDescription] = useState(false);
   return (
     <header className="bg-gumroad-green px-4 py-8">
       <div className="flex justify-between items-center">
@@ -34,8 +46,25 @@ const Header = () => {
           <FilterIcon />
         </button>
       </div>
-      <div className="mt-4">
+      <div className="mt-4 mb-2">
         <h2 className="text-2xl font-normal text-gumroad-black">{breadcrumbs.join(' / ')}</h2>
+      </div>
+      <div>
+        {showFullDescription ? (
+          <p className="text-gumroad-black">
+            {search_page_description}{' '}
+            <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(false); }}>
+              Show less
+            </a>
+          </p>
+        ) : (
+          <p className="text-gumroad-black">
+            {trimmedDescription}{' '}
+            <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(true); }}>
+              Show more
+            </a>
+          </p>
+        )}
       </div>
     </header>
   );

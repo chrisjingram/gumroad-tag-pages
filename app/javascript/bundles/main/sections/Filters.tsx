@@ -35,12 +35,6 @@ const Filters: React.FC<Props> = () => {
   const addTagKey = useCallback((tagKey) => {
     setSelectedTagKeys([...selectedTagKeys, tagKey])
   }, [selectedTagKeys, setSelectedTagKeys])
-
-  console.log("tags", tags);
-  console.log("selectedTagKeys", selectedTagKeys);
-  const selectedTags = selectedTagKeys.map(key => tags.find(tag => tag.key === key))
-  console.log("selectedTags", selectedTags);
-
   return (
     <section className="px-4 pt-4 mb-2">
       <div className="border border-gumroad-black rounded-[4px] p-4 bg-white">
@@ -53,8 +47,8 @@ const Filters: React.FC<Props> = () => {
             </div>
             {shouldShowOtherTags && (
               <ul className="flex overflow-x-scroll w-full mt-3 gap-2">
-                {selectedTagKeys.map(key => tags.find(tag => tag.key === key)).map(tag => <li><TagCell tag={tag} removeTagKey={removeTagKey} /></li>)}
-                {tags.filter(tag => !selectedTagKeys.includes(tag.key)).map((tag) => <li><OtherTagCell tag={tag} onClick={() => addTagKey(tag.key)} /></li>)}
+                {selectedTagKeys.map(key => tags.find(tag => tag.key === key)).map(tag => <li key={tag.key}><TagCell tag={tag} removeTagKey={removeTagKey} /></li>)}
+                {tags.filter(tag => !selectedTagKeys.includes(tag.key)).map((tag) => <li key={tag.key}><OtherTagCell tag={tag} onClick={() => addTagKey(tag.key)} /></li>)}
               </ul>
             )}
           </>

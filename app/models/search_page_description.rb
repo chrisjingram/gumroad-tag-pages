@@ -23,7 +23,7 @@ class SearchPageDescription < ApplicationRecord
 
       # Generate descriptions for combinations of two tags
       tags.combination(2).each do |tag_combo|
-        next if find_by(breadcrumbs: category_slug, tags: tag).present?
+        next if find_by(breadcrumbs: category_slug, tags: tag_combo.join(',')).present?
         description = call_claude_api(category_slug, tag_combo)
         create!(
           breadcrumbs: category_slug,

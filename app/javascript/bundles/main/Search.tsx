@@ -9,12 +9,13 @@ export interface SearchProps {
   products: Product[];
   tags: Tag[];
   initial_selected_tag_keys: string[];
+  search_page_description: string;
 }
 
-const Search: React.FC<SearchProps> = ({ products, tags }) => {
+const Search: React.FC<SearchProps> = ({ search_page_description }) => {
   return (
     <div className="bg-gumroad-cream">
-      <Header />
+      <Header search_page_description={search_page_description} />
       <FiltersSummary />
       <Filters />
       <Products />
