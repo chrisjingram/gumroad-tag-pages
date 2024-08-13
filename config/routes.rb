@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
   get "/:top_level_category", to: "search#index", constraints: SearchController::CategoryConstraints.new
   get "/:top_level_category/*category_tail", to: "search#index", constraints: SearchController::CategoryConstraints.new
-  
-  get 'hello_world', to: 'hello_world#index'
 
+  get "/products/search", to: "products#search"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Search, { SearchProps } from "./Search";
 import { FiltersProvider } from "./contexts/filtersContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ProductsProvider } from "./contexts/productsContext";
 
 const App: React.FC<SearchProps> = (props) => {
+  const [queryClient] = useState(() => new QueryClient())
   return (
-    <FiltersProvider initialSelectedTagKeys={props.initial_selected_tag_keys} tags={props.tags}>
-      <Search {...props} />
-    </FiltersProvider>
+    <QueryClientProvider client={queryClient}>
+      <FiltersProvider initialSelectedTagKeys={props.initial_selected_tag_keys} tags={props.tags}>
+        <ProductsProvider>
+            <Search {...props} />
+        </ProductsProvider>
+      </FiltersProvider>
+    </QueryClientProvider>
   );
 };
 

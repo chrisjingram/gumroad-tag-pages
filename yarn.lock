@@ -1910,6 +1910,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/object-hash@npm:^3":
+  version: 3.0.6
+  resolution: "@types/object-hash@npm:3.0.6"
+  checksum: 10c0/a5450cafdbc33c840be2c36fb1ace96cce7aa580177cf68dbdbda80f18938207692d74c76403321c99f43460ac31981c4af7fe8b49eca1570f8e9a4c01eaf33d
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.2
   resolution: "@types/parse-json@npm:4.0.2"
@@ -2428,6 +2435,7 @@ __metadata:
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.15"
     "@tanstack/react-query": "npm:^5.51.23"
     "@types/babel__core": "npm:^7.20.5"
+    "@types/object-hash": "npm:^3"
     "@types/qs": "npm:^6"
     "@types/react": "npm:^18.3.3"
     "@types/webpack": "npm:^5.28.5"
@@ -2442,6 +2450,7 @@ __metadata:
     css-loader: "npm:^7.1.2"
     css-minimizer-webpack-plugin: "npm:^7.0.0"
     mini-css-extract-plugin: "npm:^2.9.0"
+    object-hash: "npm:^3.0.0"
     postcss: "npm:^8.4.41"
     postcss-loader: "npm:^8.1.1"
     prop-types: "npm:^15.8.1"
@@ -2455,6 +2464,7 @@ __metadata:
     tailwindcss: "npm:^3.4.9"
     terser-webpack-plugin: "npm:^5.3.10"
     typescript: "npm:^5.5.4"
+    usehooks-ts: "npm:^3.1.0"
     webpack: "npm:^5.93.0"
     webpack-assets-manifest: "npm:^5.2.1"
     webpack-cli: "npm:^4.10.0"
@@ -7292,6 +7302,17 @@ __metadata:
   dependencies:
     punycode: "npm:^2.1.0"
   checksum: 10c0/4ef57b45aa820d7ac6496e9208559986c665e49447cb072744c13b66925a362d96dd5a46c4530a6b8e203e5db5fe849369444440cb22ecfc26c679359e5dfa3c
+  languageName: node
+  linkType: hard
+
+"usehooks-ts@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "usehooks-ts@npm:3.1.0"
+  dependencies:
+    lodash.debounce: "npm:^4.0.8"
+  peerDependencies:
+    react: ^16.8.0  || ^17 || ^18
+  checksum: 10c0/2204d8c95109302bdaaa51a66bf216f3dba750f1d2795c20ecba75ba1c44a070a253935d537ef536514ab6e363bcc02ccc78b5ad63576ff8d880d577cf3fc48f
   languageName: node
   linkType: hard
 
