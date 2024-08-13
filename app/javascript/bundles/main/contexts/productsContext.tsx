@@ -5,8 +5,6 @@ import objectHash from "object-hash";
 import { Product, Tag } from "../Types.interface";
 import { useFilters } from "./filtersContext";
 
-const queryClient = new QueryClient();
-
 interface ProductsContextValue {
   products: Product[];
   isLoading: boolean;

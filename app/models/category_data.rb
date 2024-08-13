@@ -21,4 +21,7 @@ class CategoryData
       "Other"
     ]
   end
+  def self.all_categories_slugs
+    all_categories.map { |category| category.downcase.gsub("&", "and").parameterize }
+  end
 end

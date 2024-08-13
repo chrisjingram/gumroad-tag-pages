@@ -16,7 +16,7 @@ const Search: React.FC<SearchProps> = ({ products, tags }) => {
     <div className="bg-gumroad-cream">
       <Header />
       <FiltersSummary />
-      <Filters tags={tags} />
+      <Filters />
       <Products />
     </div>
   )

@@ -13,21 +13,17 @@ interface FiltersContextValue {
   selectedTagKeys: string[];
   debouncedSelectedTagKeys: string[];
   setSelectedTagKeys?: React.Dispatch<SetStateAction<string[]>>;
-  selectedTags: Tag[];
 }
 
 export const FiltersContext = React.createContext<FiltersContextValue>({
   selectedTagKeys: [],
   debouncedSelectedTagKeys: [],
-  setSelectedTagKeys: null,
-  selectedTags: []
+  setSelectedTagKeys: null
 });
 
 export const FiltersProvider: React.FC<Props> = ({ initialSelectedTagKeys, tags, children }) => {
   const [selectedTagKeys, setSelectedTagKeys] = useState(initialSelectedTagKeys || []);
   const [debouncedSelectedTagKeys] = useDebounceValue(selectedTagKeys, 500);
-
-  const selectedTags = selectedTagKeys.map(key => tags.find(tag => tag.key === key))
 
   useEffect(() => {
     const existingQS = qs.parse(window.location.search.slice(1));
@@ -44,8 +40,7 @@ export const FiltersProvider: React.FC<Props> = ({ initialSelectedTagKeys, tags,
     <FiltersContext.Provider value={{
       selectedTagKeys,
       debouncedSelectedTagKeys,
-      setSelectedTagKeys,
-      selectedTags
+      setSelectedTagKeys
     }}>
       {children}
     </FiltersContext.Provider>

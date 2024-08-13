@@ -1,7 +1,5 @@
 <%= react_component "SearchApp", {
   props: {
-    products: @product_data.dig(:products),
-    tags: @product_data.dig(:tags_data),
-    initial_selected_tag_keys: @initial_selected_tag_keys || [],
+    initial_selected_tag_keys: @initial_selected_tag_keys || []
   }
 } %>
