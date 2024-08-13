@@ -25,7 +25,7 @@ interface Props {}
 const Filters: React.FC<Props> = () => {
   const { selectedTagKeys, setSelectedTagKeys } = useFilters();
   const { isLoading, tags } = useTags();
-  const [shouldShowOtherTags, setShouldShowOtherTags] = useState(false);
+  const [shouldShowOtherTags, setShouldShowOtherTags] = useState(selectedTagKeys.length === 0);
   const removeTagKey = useCallback((keyToRemove) => {
     setSelectedTagKeys(selectedTagKeys.filter(key => key !== keyToRemove));
   }, [setSelectedTagKeys, selectedTagKeys]);
@@ -42,8 +42,8 @@ const Filters: React.FC<Props> = () => {
         (
           <>
             <div className="flex items-center">
-              <div className="flex-1 text-sm">Filtering for: {selectedTagKeys.join(", ")}</div>
-              <button onClick={toggleOtherTags} className="text-sm flex items-center">{shouldShowOtherTags ? <ChevronUpIcon className="w-3 h-3" /> : <ChevronDownIcon className="w-3 h-3" /> }&nbsp;Edit tags</button>
+              <div className="flex-1 text-sm">{selectedTagKeys.length > 0 ? `Filtering for: ${selectedTagKeys.join(", ")}` : "Filter by tags:"}</div>
+              <button onClick={toggleOtherTags} className="text-sm flex ml-auto items-center">{shouldShowOtherTags ? <ChevronUpIcon className="w-3 h-3" /> : <ChevronDownIcon className="w-3 h-3" /> }&nbsp;Edit tags</button>
             </div>
             {shouldShowOtherTags && (
               <ul className="flex overflow-x-scroll w-full mt-3 gap-2">
