@@ -20,7 +20,6 @@ export const FiltersContext = React.createContext<FiltersContextValue>({
   selectedTags: []
 });
 
-
 export const FiltersProvider: React.FC<Props> = ({ initialSelectedTagKeys, tags, children }) => {
   const [selectedTagKeys, setSelectedTagKeys] = useState(initialSelectedTagKeys || []);
 

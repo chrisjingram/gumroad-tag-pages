@@ -3,6 +3,7 @@ import Header from "./sections/Header";
 import Products from "./sections/Products";
 import { Product, Tag } from "./Types.interface";
 import Filters from "./sections/Filters";
+import FiltersSummary from "./sections/FiltersSummary";
 
 export interface SearchProps {
   products: Product[];
@@ -14,6 +15,7 @@ const Search: React.FC<SearchProps> = ({ products, tags }) => {
   return (
     <div className="bg-gumroad-cream">
       <Header />
+      <FiltersSummary />
       <Filters tags={tags} />
       <Products products={products} />
     </div>
