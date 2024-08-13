@@ -3,6 +3,17 @@ import GumroadLogo from "@svg/gumroad.svg";
 import FilterIcon from "@svg/filter.svg";
 
 const Header = () => {
+  const pathname = window.location.pathname;
+  const formatPathname = (path: string): string[] => {
+    const segments = path.split('/').filter(segment => segment !== '');
+    return segments.map(segment => 
+      segment.split('-').map(word => 
+        word === '3d' ? '3D' : word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ')
+    );
+  };
+
+  const breadcrumbs = formatPathname(pathname);
   return (
     <header className="bg-gumroad-green px-4 py-8">
       <div className="flex justify-between items-center">
@@ -24,7 +35,7 @@ const Header = () => {
         </button>
       </div>
       <div className="mt-4">
-        <h2 className="text-2xl font-normal text-gumroad-black">3D</h2>
+        <h2 className="text-2xl font-normal text-gumroad-black">{breadcrumbs.join(' / ')}</h2>
       </div>
     </header>
   );
