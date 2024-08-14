@@ -7,6 +7,7 @@ import { useFilters } from "./filtersContext";
 
 interface ProductsContextValue {
   products: Product[];
+  total: number;
   isLoading: boolean;
   error: unknown;
 }
@@ -19,6 +20,7 @@ interface ProductsProviderProps {
 
 interface SearchResponse {
   products: Product[];
+  total: number;
 }
 
 export const ProductsProvider: React.FC<ProductsProviderProps> = ({ children }) => {
@@ -31,9 +33,10 @@ export const ProductsProvider: React.FC<ProductsProviderProps> = ({ children }) 
   });
 
   const products = searchResponse?.products || []
+  const total = searchResponse?.total || 0
 
   return (
-    <ProductsContext.Provider value={{ products, isLoading, error }}>
+    <ProductsContext.Provider value={{ products, total, isLoading, error }}>
       {children}
     </ProductsContext.Provider>
   );
