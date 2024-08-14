@@ -5,6 +5,19 @@ interface Props {
   product: Product;
 }
 
+const getCurrencySymbol = (currencyCode: string): string => {
+  const currencySymbols: { [key: string]: string } = {
+    USD: '$',
+    GBP: '£',
+    EUR: '€',
+    JPY: '¥',
+    CAD: 'C$',
+    AUD: 'A$',
+  };
+
+  return currencySymbols[currencyCode.toUpperCase()] || currencyCode;
+};
+
 // ProductCell for search to match Gumroad
 const ProductCell: React.FC<Props> = ({ product }) => {
   return (
@@ -30,7 +43,7 @@ const ProductCell: React.FC<Props> = ({ product }) => {
         </div>
         <div className="px-6">
           <div className="bg-gumroad-pink text-black px-2 py-1 text-sm border border-gumroad-black">
-            $52+
+            {getCurrencySymbol(product.currency_code)}{product.price_cents / 100}
           </div>
         </div>
       </div>
