@@ -1,6 +1,5 @@
 class SearchPageDescription < ApplicationRecord
   validates :breadcrumbs, presence: true
-  validates :tags, presence: true
   validates :description, presence: true
 
   def self.generate_descriptions
@@ -16,22 +15,20 @@ class SearchPageDescription < ApplicationRecord
         create!(
           breadcrumbs: category_slug,
           tags: tag,
-            description: description
-          )
+          description: description
+        )
         sleep(1.5) # 50 requests per minute to claude 3.5 sonnet
       end
 
-      # Generate descriptions for combinations of two tags
-      # tags.combination(2).each do |tag_combo|
-      #   next if find_by(breadcrumbs: category_slug, tags: tag_combo.join(',')).present?
-      #   description = call_claude_api(category_slug, tag_combo)
-      #   create!(
-      #     breadcrumbs: category_slug,
-      #     tags: tag_combo.join(','),
-      #     description: description
-      #   )
-      #   sleep(1.5) # 50 requests per minute to claude 3.5 sonnet
-      # end
+      # Generate description for no tags
+      next if find_by(breadcrumbs: category_slug, tags: nil).present?
+      description = call_claude_api(category_slug, [])
+      create!(
+        breadcrumbs: category_slug,
+        tags: nil,
+        description: description
+      )
+      sleep(1.5) # 50 requests per minute to claude 3.5 sonnet
     end
   end
 
@@ -57,6 +54,12 @@ class SearchPageDescription < ApplicationRecord
         }
       )
       response.with_indifferent_access.dig(:content, 0, :text).strip
+    rescue Faraday::ServerError, Faraday::ClientError => e
+      # Retry on server error or client error (5xx or 4xx)
+      # Anthropic API is often overloaded and returns 529
+      Rails.logger.error("Error calling Claude API: #{e.message}")
+      Rails.logger.info("Retrying...")
+      retry
     rescue Anthropic::Error => e
       Rails.logger.error("Error calling Claude API: #{e.message}")
       raise "Unable to generate description for #{category} - #{tags.join(', ')}."
