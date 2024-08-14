@@ -22,13 +22,20 @@ const OtherTagCell: React.FC<{ tag: Tag, onClick: React.MouseEventHandler<HTMLBu
 
 interface Props {}
 
+// New tag select component
+// Allows the user to see currently selected tags when page first loads, and to add/remove tags
 const Filters: React.FC<Props> = () => {
+  // Get currently selected tags from context
   const { selectedTagKeys, setSelectedTagKeys, setTagsChangedByUser } = useFilters();
+  // All tags from API/cache
   const { isLoading, tags } = useTags();
+  // For showing/hiding the "edit tags" section
   const [shouldShowOtherTags, setShouldShowOtherTags] = useState(selectedTagKeys.length === 0);
 
+  // Click handlers for adding/removing tags and toggling the "edit tags" section
   const removeTagKey = useCallback((keyToRemove) => {
     setSelectedTagKeys(selectedTagKeys.filter(key => key !== keyToRemove));
+    // Set tagsChangedByUser to true to hide the category description if they start narrowing their search
     setTagsChangedByUser(true);
   }, [setSelectedTagKeys, selectedTagKeys, setTagsChangedByUser]);
 
@@ -38,6 +45,7 @@ const Filters: React.FC<Props> = () => {
 
   const addTagKey = useCallback((tagKey) => {
     setSelectedTagKeys([...selectedTagKeys, tagKey])
+    // Set tagsChangedByUser to true to hide the category description if they start narrowing their search
     setTagsChangedByUser(true);
   }, [selectedTagKeys, setSelectedTagKeys, setTagsChangedByUser])
   return (

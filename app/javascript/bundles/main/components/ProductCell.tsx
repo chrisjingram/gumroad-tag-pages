@@ -5,6 +5,7 @@ interface Props {
   product: Product;
 }
 
+// ProductCell for search to match Gumroad
 const ProductCell: React.FC<Props> = ({ product }) => {
   return (
     <div className="rounded-[4px] border border-gumroad-black overflow-hidden bg-white">

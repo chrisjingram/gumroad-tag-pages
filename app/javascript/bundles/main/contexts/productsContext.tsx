@@ -1,7 +1,6 @@
 import React, { ReactNode, useContext } from "react";
-import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import objectHash from "object-hash";
 import { Product, Tag } from "../Types.interface";
 import { useFilters } from "./filtersContext";
 
@@ -23,12 +22,17 @@ interface SearchResponse {
   total: number;
 }
 
+// Context to provide the products to all components
 export const ProductsProvider: React.FC<ProductsProviderProps> = ({ children }) => {
+  // Uses the debounced tags from the above filters context
   const { debouncedSelectedTagKeys } = useFilters();
   const categorySlug = window.location.pathname.split('/').slice(1)[0]
 
+  // Call proxied Gumroad API to get products based on categories and tags
+  // Query is cached locally based on the category and tags
+  // Makes the app feel snappier when moving between tags
   const { data: searchResponse, isLoading, error } = useQuery<SearchResponse, unknown>({
-    queryKey: ['products', debouncedSelectedTagKeys.join(',')],
+    queryKey: ['products', `${categorySlug}/${debouncedSelectedTagKeys.join(',')}`],
     queryFn: () => axios.get('/products/search', { params: { taxonomy: categorySlug, tags: debouncedSelectedTagKeys } }).then((response) => response.data)
   });
 

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProductsProvider } from "./contexts/productsContext";
 import { TagsProvider } from "./contexts/tagsContext";
 
+// Entrypoint for the search page
 const App: React.FC<SearchProps> = (props) => {
   const [queryClient] = useState(() => new QueryClient())
   return (

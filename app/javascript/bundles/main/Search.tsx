@@ -12,6 +12,7 @@ export interface SearchProps {
   search_page_description: string;
 }
 
+// Search page layout
 const Search: React.FC<SearchProps> = ({ search_page_description }) => {
   return (
     <div className="bg-gumroad-cream">

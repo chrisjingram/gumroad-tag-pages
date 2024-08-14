@@ -2,6 +2,7 @@ import React from "react";
 import ProductCell from "../components/ProductCell";
 import { useProducts } from "../contexts/productsContext";
 
+// List of products, getting products from context
 const Products = () => {
   const { products } = useProducts();
   return (

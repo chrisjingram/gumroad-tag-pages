@@ -24,15 +24,19 @@ export const FiltersContext = React.createContext<FiltersContextValue>({
   tagsChangedByUser: false
 });
 
+// Context to provide the currently selected tags to all components in the tree
 export const FiltersProvider: React.FC<Props> = ({ initialSelectedTagKeys, children }) => {
   const [selectedTagKeys, setSelectedTagKeys] = useState(initialSelectedTagKeys || []);
+  // Used to remove the category description when the tags are changed
   const [tagsChangedByUser, setTagsChangedByUser] = useState(false);
+  // Debounced tags to prevent overloading the API if someone mashes the tags
   const [debouncedSelectedTagKeys] = useDebounceValue(selectedTagKeys, 500);
 
+  // Update the URL when the tags change
   useEffect(() => {
+    // Using qs to preseve any existing query string and replace the tags
     const existingQS = qs.parse(window.location.search.slice(1));
     const queryString = qs.stringify({ ...existingQS, tags: selectedTagKeys }, { arrayFormat: "comma", encodeValuesOnly: true });
-    console.log("queryString", queryString);
     window.history.replaceState(
       {},
       "",

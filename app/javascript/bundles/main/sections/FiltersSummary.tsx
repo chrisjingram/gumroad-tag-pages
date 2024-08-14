@@ -1,6 +1,7 @@
 import React from "react";
 import { useProducts } from "../contexts/productsContext";
 
+// Filter summary component to match Gumroad design
 const FiltersSummary: React.FC = () => {
   const { total } = useProducts();
   return (

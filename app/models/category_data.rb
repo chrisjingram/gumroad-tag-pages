@@ -1,4 +1,5 @@
 class CategoryData
+  # List of all categories direcly from Gumroad website
   def self.all_categories
     [
       "3D",
@@ -21,6 +22,8 @@ class CategoryData
       "Other"
     ]
   end
+  # Parameterized version of all categories for use in URLs
+  # Same format as Gumroad website
   def self.all_categories_slugs
     all_categories.map { |category| category.downcase.gsub("&", "and").parameterize }
   end

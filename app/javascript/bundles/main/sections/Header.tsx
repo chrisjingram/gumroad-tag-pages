@@ -12,6 +12,8 @@ const trimDescription = (description: string): string => {
   return sentences.slice(0, 2).join(' ').trim();
 };
 
+// Gumroad header and search page description
+// Search page description is trimmed to 2 sentences, but can be expanded by the user
 const Header: React.FC<Props> = ({ search_page_description }) => {
   const pathname = window.location.pathname;
   const formatPathname = (path: string): string[] => {
@@ -51,6 +53,7 @@ const Header: React.FC<Props> = ({ search_page_description }) => {
       <div className="mt-4 mb-2">
         <h2 className="text-2xl font-normal text-gumroad-black">{breadcrumbs.join(' / ')}</h2>
       </div>
+      {/* Show search page description if it exists and the user hasn't changed the tags */}
       {search_page_description && !tagsChangedByUser && (
         <div>
           {showFullDescription ? (
