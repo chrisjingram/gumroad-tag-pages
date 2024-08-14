@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: gumroad_tag_pages_production
-  username: gumroad_tag_pages
-  password: <%= ENV["GUMROAD_TAG_PAGES_DATABASE_PASSWORD"] %>
