@@ -4,7 +4,8 @@ import FilterIcon from "@svg/filter.svg";
 import { useFilters } from '../contexts/filtersContext';
 
 interface Props {
-  search_page_description: string;
+  search_page_description_for_tag: string;
+  search_page_description_for_category: string;
 }
 
 const trimDescription = (description: string): string => {
@@ -14,7 +15,7 @@ const trimDescription = (description: string): string => {
 
 // Gumroad header and search page description
 // Search page description is trimmed to 2 sentences, but can be expanded by the user
-const Header: React.FC<Props> = ({ search_page_description }) => {
+const Header: React.FC<Props> = ({ search_page_description_for_tag, search_page_description_for_category }) => {
   const pathname = window.location.pathname;
   const formatPathname = (path: string): string[] => {
     const segments = path.split('/').filter(segment => segment !== '');
@@ -26,8 +27,8 @@ const Header: React.FC<Props> = ({ search_page_description }) => {
   };
 
   const breadcrumbs = formatPathname(pathname);
-  const trimmedDescription = search_page_description ? trimDescription(search_page_description) : null;
-
+  const trimmedDescriptionForTag = search_page_description_for_tag ? trimDescription(search_page_description_for_tag) : null;
+  const trimmedDescriptionForCategory = search_page_description_for_category ? trimDescription(search_page_description_for_category) : null;
   const [showFullDescription, setShowFullDescription] = useState(false);
   const { tagsChangedByUser } = useFilters();
   return (
@@ -54,18 +55,19 @@ const Header: React.FC<Props> = ({ search_page_description }) => {
         <h2 className="text-2xl font-normal text-gumroad-black">{breadcrumbs.join(' / ')}</h2>
       </div>
       {/* Show search page description if it exists and the user hasn't changed the tags */}
-      {search_page_description && !tagsChangedByUser && (
+      {search_page_description_for_category && (
         <div>
+          {/* If the user changes tags, revert to the general category description */}
           {showFullDescription ? (
             <p className="text-gumroad-black">
-              {search_page_description}{' '}
+              {tagsChangedByUser ? search_page_description_for_category : search_page_description_for_tag}{' '}
               <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(false); }}>
                 Show less
               </a>
             </p>
           ) : (
             <p className="text-gumroad-black">
-              {trimmedDescription}{' '}
+              {tagsChangedByUser ? trimmedDescriptionForCategory : trimmedDescriptionForTag}{' '}
               <a href="#" className="text-gumroad-black underline" onClick={(e) => { e.preventDefault(); setShowFullDescription(true); }}>
                 Show more
               </a>

@@ -2,7 +2,9 @@ class SearchController < ApplicationController
   def index
     # Pass initially selected tags and search page description to the React view as props
     @initial_selected_tag_keys = params[:tags]&.split(",")
-    @search_page_description = SearchPageDescription.find_by(breadcrumbs: params[:top_level_category], tags: params[:tags])&.description
+    # Pass descriptions for tag and category to the React view as props
+    @search_page_description_for_tag = SearchPageDescription.find_by(breadcrumbs: params[:top_level_category], tags: params[:tags])&.description
+    @search_page_description_for_category = SearchPageDescription.find_by(breadcrumbs: params[:top_level_category], tags: nil)&.description
     respond_to do |format|
       format.html
     end

@@ -9,14 +9,15 @@ export interface SearchProps {
   products: Product[];
   tags: Tag[];
   initial_selected_tag_keys: string[];
-  search_page_description: string;
+  search_page_description_for_category: string;
+  search_page_description_for_tag: string;
 }
 
 // Search page layout
-const Search: React.FC<SearchProps> = ({ search_page_description }) => {
+const Search: React.FC<SearchProps> = ({ search_page_description_for_category, search_page_description_for_tag }) => {
   return (
     <div className="bg-gumroad-cream">
-      <Header search_page_description={search_page_description} />
+      <Header search_page_description_for_category={search_page_description_for_category} search_page_description_for_tag={search_page_description_for_tag} />
       <FiltersSummary />
       <Filters />
       <Products />
