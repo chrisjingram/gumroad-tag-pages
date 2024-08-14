@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GumroadLogo from "@svg/gumroad.svg";
 import FilterIcon from "@svg/filter.svg";
+import { useFilters } from '../contexts/filtersContext';
 
 interface Props {
   search_page_description: string;
@@ -26,6 +27,7 @@ const Header: React.FC<Props> = ({ search_page_description }) => {
   const trimmedDescription = search_page_description ? trimDescription(search_page_description) : null;
 
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const { tagsChangedByUser } = useFilters();
   return (
     <header className="bg-gumroad-green px-4 py-8">
       <div className="flex justify-between items-center">
@@ -49,7 +51,7 @@ const Header: React.FC<Props> = ({ search_page_description }) => {
       <div className="mt-4 mb-2">
         <h2 className="text-2xl font-normal text-gumroad-black">{breadcrumbs.join(' / ')}</h2>
       </div>
-      {search_page_description && (
+      {search_page_description && !tagsChangedByUser && (
         <div>
           {showFullDescription ? (
             <p className="text-gumroad-black">

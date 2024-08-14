@@ -23,18 +23,23 @@ const OtherTagCell: React.FC<{ tag: Tag, onClick: React.MouseEventHandler<HTMLBu
 interface Props {}
 
 const Filters: React.FC<Props> = () => {
-  const { selectedTagKeys, setSelectedTagKeys } = useFilters();
+  const { selectedTagKeys, setSelectedTagKeys, setTagsChangedByUser } = useFilters();
   const { isLoading, tags } = useTags();
   const [shouldShowOtherTags, setShouldShowOtherTags] = useState(selectedTagKeys.length === 0);
+
   const removeTagKey = useCallback((keyToRemove) => {
     setSelectedTagKeys(selectedTagKeys.filter(key => key !== keyToRemove));
-  }, [setSelectedTagKeys, selectedTagKeys]);
+    setTagsChangedByUser(true);
+  }, [setSelectedTagKeys, selectedTagKeys, setTagsChangedByUser]);
+
   const toggleOtherTags = useCallback(() => {
     setShouldShowOtherTags(!shouldShowOtherTags);
   }, [shouldShowOtherTags, setShouldShowOtherTags]);
+
   const addTagKey = useCallback((tagKey) => {
     setSelectedTagKeys([...selectedTagKeys, tagKey])
-  }, [selectedTagKeys, setSelectedTagKeys])
+    setTagsChangedByUser(true);
+  }, [selectedTagKeys, setSelectedTagKeys, setTagsChangedByUser])
   return (
     <section className="px-4 pt-4 mb-2">
       <div className="border border-gumroad-black rounded-[4px] p-4 bg-white">
