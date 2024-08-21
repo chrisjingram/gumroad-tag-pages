@@ -143,7 +143,7 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     mini_mime (1.1.5)
-    minitest (5.24.1)
+    minitest (5.25.1)
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
@@ -231,7 +231,7 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
-    react_on_rails (14.0.4)
+    react_on_rails (14.0.5)
       addressable
       connection_pool
       execjs (~> 2.5)
@@ -337,7 +337,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.2.0)
-  react_on_rails (= 14.0.4)
+  react_on_rails (= 14.0.5)
   rubocop-rails-omakase
   selenium-webdriver
   shakapacker (= 8.0)
