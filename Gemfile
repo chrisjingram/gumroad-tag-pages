@@ -58,4 +58,4 @@ gem "oj", "~> 3.16"
 
 gem "httparty", "~> 0.22.0"
 
-gem "anthropic", "~> 0.3.0"
+gem "anthropic", "~> 0.3.2"
